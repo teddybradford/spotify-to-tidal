@@ -393,7 +393,9 @@ async def get_playlists_from_spotify(spotify_session: spotipy.Spotify, config):
     # filter out playlists that don't belong to us or are on the exclude list
     my_playlist_filter = lambda p: p and p['owner']['id'] == user_id
     exclude_filter = lambda p: not p['id'] in exclude_list
-    return list(filter( exclude_filter, filter( my_playlist_filter, playlists )))
+    filtered_playlists = list(filter( exclude_filter, filter( my_playlist_filter, playlists )))
+    filtered_playlists.reverse()
+    return filtered_playlists
 
 def get_playlists_from_config(spotify_session: spotipy.Spotify, tidal_session: tidalapi.Session, config):
     # get the list of playlist sync mappings from the configuration file
