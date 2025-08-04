@@ -280,7 +280,7 @@ async def search_new_tracks_on_tidal(tidal_session: tidalapi.Session, spotify_tr
             song404.append(f"{spotify_track['id']}: {','.join([a['name'] for a in spotify_track['artists']])} - {spotify_track['name']}")
             color = ('\033[91m', '\033[0m')
             print(color[0] + "Could not find the track " + song404[-1] + color[1])
-    file_name = "songs not found.txt"
+    file_name = "songs_not_found.txt"
     with open(file_name, "a", encoding="utf-8") as file:
         for song in song404:
             file.write(f"{song}\n")
