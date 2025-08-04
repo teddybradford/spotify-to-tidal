@@ -21,6 +21,10 @@ def main():
     tidal_session = _auth.open_tidal_session()
     if not tidal_session.check_login():
         sys.exit("Could not connect to Tidal")
+
+    sync_favorites = False # Initialize sync_favorites to False by default
+    sync_albums = False    # Initialize sync_albums to False by default
+
     if args.uri:
         # if a playlist ID is explicitly provided as a command line argument then use that
         spotify_playlist = spotify_session.playlist(args.uri)
@@ -30,19 +34,23 @@ def main():
         sync_favorites = args.sync_favorites # only sync favorites if command line argument explicitly passed
     elif args.sync_favorites:
         sync_favorites = True # sync only the favorites
+    elif args.sync_albums:
+        sync_albums = True # sync only the albums
     elif config.get('sync_playlists', None):
         # if the config contains a sync_playlists list of mappings then use that
         _sync.sync_playlists_wrapper(spotify_session, tidal_session, _sync.get_playlists_from_config(spotify_session, tidal_session, config), config)
         sync_favorites = args.sync_favorites is None and config.get('sync_favorites_default', True)
+        sync_albums = args.sync_albums is None and config.get('sync_albums_default', True)
     else:
-        # otherwise sync all the user playlists in the Spotify account and favorites unless explicitly disabled
+        # otherwise sync all the user playlists in the Spotify account, favorites, and saved albums unless explicitly disabled
         _sync.sync_playlists_wrapper(spotify_session, tidal_session, _sync.get_user_playlist_mappings(spotify_session, tidal_session, config), config)
         sync_favorites = args.sync_favorites is None and config.get('sync_favorites_default', True)
+        sync_albums = args.sync_albums is None and config.get('sync_albums_default', True)
 
     if sync_favorites:
         _sync.sync_favorites_wrapper(spotify_session, tidal_session, config)
 
-    if args.sync_albums is None and config.get('sync_albums_default', True) or args.sync_albums:
+    if args.sync_albums:
         _sync.sync_albums_wrapper(spotify_session, tidal_session, config)
 
 if __name__ == '__main__':

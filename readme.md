@@ -1,25 +1,33 @@
 A command line tool for importing your Spotify playlists into Tidal. Due to various performance optimisations, it is particularly suited for periodic synchronisation of very large collections.
 
-Installation
------------
+## Installation
+
 Clone this git repository and then run:
 
 ```bash
 python3 -m pip install -e .
 ```
 
-Setup
------
-0. Rename the file example_config.yml to config.yml
-0. Go [here](https://developer.spotify.com/documentation/general/guides/authorization/app-settings/) and register a new app on developer.spotify.com.
-0. Copy and paste your client ID and client secret to the Spotify part of the config file
-0. Copy and paste the value in 'redirect_uri' of the config file to Redirect URIs at developer.spotify.com and press ADD
-0. Enter your Spotify username to the config file
+or for Homebrew-managed python3:
 
-Usage
-----
-To synchronize all of your Spotify playlists with your Tidal account run the following from the project root directory
-Windows ignores python module paths by default, but you can run them using `python3 -m spotify_to_tidal`
+```bash
+brew install pipx
+pipx install -e .
+```
+
+and make sure `~/.local/bin` is included in your PATH environment variable.
+
+## Setup
+
+1. Rename the file example_config.yml to config.yml
+1. Go [here](https://developer.spotify.com/documentation/general/guides/authorization/app-settings/) and register a new app on developer.spotify.com.
+1. Copy and paste your client ID and client secret to the Spotify part of the config file
+1. Copy and paste the value in 'redirect_uri' of the config file to Redirect URIs at developer.spotify.com and press ADD
+1. Enter your Spotify username to the config file
+
+## Usage
+
+To synchronize all of your Spotify playlists with your Tidal account run the following from the project root directory. Windows ignores python module paths by default, but you can run them using `python3 -m spotify_to_tidal`
 
 ```bash
 spotify_to_tidal
@@ -37,12 +45,10 @@ or sync just your 'Liked Songs' with:
 spotify_to_tidal --sync-favorites
 ```
 
+or sync just your saved albums with:
+
+```bash
+spotify_to_tidal --sync-albums
+```
+
 See example_config.yml for more configuration options, and `spotify_to_tidal --help` for more options.
-
----
-
-#### Join our amazing community as a code contributor
-<br><br>
-<a href="https://github.com/spotify2tidal/spotify_to_tidal/graphs/contributors">
-  <img class="dark-light" src="https://contrib.rocks/image?repo=spotify2tidal/spotify_to_tidal&anon=0&columns=25&max=100&r=true" />
-</a>

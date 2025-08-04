@@ -416,9 +416,6 @@ def get_playlists_from_config(spotify_session: spotipy.Spotify, tidal_session: t
         output.append((spotify_playlist, tidal_playlist))
     return output
 
-#NEW IMPLEMENTATION
-
-# Add to sync.py
 
 async def get_albums_from_spotify(spotify_session: spotipy.Spotify) -> List[dict]:
     async def _get_saved_albums():
@@ -442,7 +439,12 @@ async def get_albums_from_spotify(spotify_session: spotipy.Spotify) -> List[dict
 
             return output
 
-        return await repeat_on_request_error(fetch_all_albums, _get_albums)
+        all_albums = await repeat_on_request_error(fetch_all_albums, _get_albums)
+
+        # Explicitly sort the albums by 'added_at' in descending order to ensure "recently added" order
+        all_albums.sort(key=lambda album: album['added_at'], reverse=True) 
+        
+        return all_albums
     
     print("Loading saved albums from Spotify")
     return await _get_saved_albums()
@@ -452,6 +454,7 @@ async def sync_albums(spotify_session: spotipy.Spotify, tidal_session: tidalapi.
     
     print("Loading albums from Spotify")
     spotify_albums = await get_albums_from_spotify(spotify_session)
+    spotify_albums.reverse()
     
     print(f"Found {len(spotify_albums)} albums to sync")
     
