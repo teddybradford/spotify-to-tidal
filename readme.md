@@ -1,4 +1,4 @@
-A command line tool for importing your Spotify playlists into Tidal. Due to various performance optimisations, it is particularly suited for periodic synchronisation of very large collections.
+A command line tool for importing your Spotify playlists into Tidal. Due to various performance optimizations, it is particularly suited for periodic synchronization of very large collections.
 
 ## Installation
 
@@ -19,11 +19,11 @@ and make sure `~/.local/bin` is included in your PATH environment variable.
 
 ## Setup
 
-1. Rename the file example_config.yml to config.yml
-1. Go [here](https://developer.spotify.com/documentation/general/guides/authorization/app-settings/) and register a new app on developer.spotify.com.
-1. Copy and paste your client ID and client secret to the Spotify part of the config file
-1. Copy and paste the value in 'redirect_uri' of the config file to Redirect URIs at developer.spotify.com and press ADD
-1. Enter your Spotify username to the config file
+1. Rename the file `example_config.yml` to `config.yml`
+2. Go to [developer.spotify.com](https://developer.spotify.com/documentation/general/guides/authorization/app-settings/) and register a new app
+3. Copy and paste your client ID and client secret into the Spotify part of the config file
+4. Copy and paste the value for `redirect_uri` from the config file into the `Redirect URI` field for your developer.spotify.com app and press ADD
+5. Enter your Spotify username in the config file
 
 ## Usage
 
@@ -39,7 +39,7 @@ You can also just synchronize a specific playlist by doing the following:
 spotify_to_tidal --uri 1ABCDEqsABCD6EaABCDa0a # accepts playlist id or full playlist uri
 ```
 
-or sync just your 'Liked Songs' with:
+or sync just your Liked Songs (favorites) with:
 
 ```bash
 spotify_to_tidal --sync-favorites
