@@ -15,6 +15,11 @@ spotify:
 #excluded_playlists:
 #  - spotify:playlist:1ABCDEqsABCD6EaABCDa0a
 
+# default setting used for filtering playlists
+#   - when true:  filter out playlists that don't belong to you
+#   - when false: include playlists that don't belong to you
+user_playlists_only: true
+
 # default setting for syncing favorites when no command line arguments are provided
 #   - when true:  favorites will be synced by default (overriden when any command line arg provided)
 #   - when false: favorites can only be synced manually via --sync-favorites argument

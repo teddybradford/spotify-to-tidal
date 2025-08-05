@@ -24,3 +24,4 @@ class SyncConfig(TypedDict):
     spotify: SpotifyConfig
     sync_playlists: Optional[List[PlaylistConfig]]
     excluded_playlists: Optional[List[str]]
+    user_playlists_only: bool
